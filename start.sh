@@ -14,10 +14,11 @@ CONDA_ENV_NAME="whisperx"                   # 已经安装 whisperx 的环境名
 
 # === whisperx 服务运行配置（根据你的机器推荐值） ===
 export AUDIO_ROOT="/var/www/html/uploadfile/temp"
-export WHISPER_MODEL_NAME="${WHISPER_MODEL_NAME:-medium}"   # 默认 medium，可改成 large-v2 / large-v3
-export WHISPER_DEVICE="${WHISPER_DEVICE:-cuda}"
-export WHISPER_COMPUTE_TYPE="${WHISPER_COMPUTE_TYPE:-float16}"
-export WHISPER_LANGUAGE="${WHISPER_LANGUAGE:-zh}"
+export WHISPER_MODEL_NAME="large-v2"
+export WHISPER_DEVICE="cuda"
+export WHISPER_COMPUTE_TYPE="float16"
+export WHISPER_LANGUAGE="auto"
+
 
 # uvicorn 配置
 HOST="0.0.0.0"

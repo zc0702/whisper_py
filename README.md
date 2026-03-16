@@ -11,7 +11,7 @@
 - `start.sh`：启动服务脚本（包含环境变量设置）。
 - `stop.sh`：停止服务脚本。
 
-> 说明：脚本默认假设部署路径为 `/opt/whisperx_py`，请按实际情况修改。
+> 说明：脚本默认假设部署路径为 `/xxx/whisperx_py`，请按实际情况修改。
 
 ---
 
@@ -20,8 +20,8 @@
 1. 将代码部署到服务器（示例）：
 
 ```bash
-mkdir -p /opt/whisperx_py
-cd /opt/whisperx_py
+mkdir -p /xxx/whisperx_py
+cd /xxx/whisperx_py
 # 把本项目下的文件（app.py、requirements.txt、*.sh 等）同步到此目录
 ```
 
@@ -49,15 +49,15 @@ print('name=', torch.cuda.get_device_name(0) if torch.cuda.is_available() else '
 - 指定项目目录、conda 安装路径、环境名：
 
 ```bash
-PROJECT_DIR="/opt/whisperx_py"
-CONDA_BASE="/root/miniconda3"
+PROJECT_DIR="/xxx/whisperx_py"
+CONDA_BASE="/xxx/miniconda3"
 CONDA_ENV_NAME="whisperx"
 ```
 
 - whisperx 服务相关环境变量：
 
 ```bash
-export AUDIO_ROOT="/var/www/html/uploadfile/temp"
+export AUDIO_ROOT="/xxx/uploadfile/temp"
 export WHISPER_MODEL_NAME="${WHISPER_MODEL_NAME:-medium}"   # 可改 large-v2 / large-v3
 export WHISPER_DEVICE="${WHISPER_DEVICE:-cuda}"
 export WHISPER_COMPUTE_TYPE="${WHISPER_COMPUTE_TYPE:-float16}"
@@ -76,7 +76,7 @@ LOG_LEVEL="${LOG_LEVEL:-info}"
 启动方式：
 
 ```bash
-cd /opt/whisperx_py
+cd /xxx/whisperx_py
 chmod +x start.sh stop.sh
 ./start.sh
 ```
@@ -95,19 +95,19 @@ uvicorn app:app --host 0.0.0.0 --port 8000 --workers 1 --log-level info
 
 ---
 
-### 4. 停止脚本说明（stop_whisperx_service.sh）
+### 4. 停止脚本说明（stop.sh）
 
 脚本通过 `PID_FILE` 找到 uvicorn 进程并优雅停止：
 
 ```bash
-PROJECT_DIR="/opt/whisperx_py"
+PROJECT_DIR="/xxx/whisperx_py"
 PID_FILE="${PROJECT_DIR}/whisperx_service.pid"
 ```
 
 使用方式：
 
 ```bash
-cd /opt/whisperx_py
+cd /xxx/whisperx_py
 ./stop.sh
 ```
 
@@ -142,11 +142,11 @@ cd /opt/whisperx_py
 
 ```json
 {
-  "filepath": "/var/www/html/uploadfile/temp/test.wav"
+  "filepath": "/xxx/uploadfile/temp/test.wav"
 }
 ```
 
-方式二：只传文件名（会自动拼接到 `AUDIO_ROOT` 下）
+方式二：只传文件名（会自动拼接到 `AUDIO_ROOT`）
 
 ```json
 {
@@ -196,7 +196,7 @@ cd /opt/whisperx_py
 ```json
 {
   "code": 1,
-  "message": "file not found: /var/www/html/uploadfile/temp/test.wav",
+  "message": "file not found: /xxx/uploadfile/temp/test.wav",
   "data": null
 }
 ```
@@ -226,7 +226,7 @@ cd /opt/whisperx_py
 ### 6. PHP 调用示例
 
 ```php
-$audioFile = "/var/www/html/uploadfile/temp/xxx.wav";
+$audioFile = "/xxx/uploadfile/temp/xxx.wav";
 
 $payload = json_encode([
     'filepath' => $audioFile,

@@ -242,7 +242,7 @@ def transcribe(body: TranscribeRequest) -> JSONResponse:
 @app.get("/health")
 def health() -> dict:
     """
-    健康检查接口，PHP/监控可用于探活。
+    健康检查接口，可用于探活。
     """
     return {"status": "ok"}
 
